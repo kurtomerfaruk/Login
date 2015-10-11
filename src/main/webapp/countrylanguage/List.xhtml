@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="CountrylanguageListForm">
+
+        <p:panel header="#{messages.ListCountrylanguageTitle}">
+            <p:contextMenu id="CountrylanguageDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{messages.Create}" onclick="document.getElementById('CountrylanguageListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{messages.View}" onclick="document.getElementById('CountrylanguageListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{messages.Edit}" onclick="document.getElementById('CountrylanguageListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{messages.Delete}" onclick="document.getElementById('CountrylanguageListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{messages.CountrylanguageMenuItem_country}" icon="ui-icon-search"  actionListener="#{countrylanguageController.prepareCountry}" update=":CountryViewForm" oncomplete="PF('CountryViewDialog').show()" disabled="#{empty countrylanguageController.selected.country}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{countrylanguageController.items}"
+                         var="item"
+                         rowKey="#{item.countrylanguagePK}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{countrylanguageController.selected}">
+
+                <p:ajax event="rowSelect"   update=":CountrylanguageListForm:createButton :CountrylanguageListForm:viewButton :CountrylanguageListForm:editButton :CountrylanguageListForm:deleteButton :CountrylanguageListForm:CountrylanguageDataTableContextMenu" listener="#{countrylanguageController.resetParents}"/>
+                <p:ajax event="rowUnselect" update=":CountrylanguageListForm:createButton :CountrylanguageListForm:viewButton :CountrylanguageListForm:editButton :CountrylanguageListForm:deleteButton :CountrylanguageListForm:CountrylanguageDataTableContextMenu" listener="#{countrylanguageController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('CountrylanguageListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.countrylanguagePK.language}" filterBy="#{item.countrylanguagePK.language}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountrylanguageTitle_countrylanguagePK_language}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.countrylanguagePK.language}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.isOfficial}" filterBy="#{item.isOfficial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountrylanguageTitle_isOfficial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.isOfficial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.percentage}" filterBy="#{item.percentage}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountrylanguageTitle_percentage}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.percentage}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.country.name}" filterBy="#{item.country.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountrylanguageTitle_country}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.country.name}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{messages.Create}" actionListener="#{countrylanguageController.prepareCreate}" update=":CountrylanguageCreateForm" oncomplete="PF('CountrylanguageCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{messages.View}" update=":CountrylanguageViewForm" oncomplete="PF('CountrylanguageViewDialog').show()" disabled="#{empty countrylanguageController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{messages.Edit}" update=":CountrylanguageEditForm" oncomplete="PF('CountrylanguageEditDialog').show()" disabled="#{empty countrylanguageController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{messages.Delete}" actionListener="#{countrylanguageController.delete}" update=":growl,datalist" disabled="#{empty countrylanguageController.selected}">
+                <p:confirm header="#{messages.ConfirmationHeader}" message="#{messages.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CountryViewDlg" widgetVar="CountryViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{messages.ViewCountryTitle}" closeOnEscape="true">
+
+            <h:form id="CountryViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{countryController.selected != null}">
+
+                        <h:outputText value="#{messages.ViewCountryLabel_code}"/>
+                        <h:outputText value="#{countryController.selected.code}" title="#{messages.ViewCountryTitle_code}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_name}"/>
+                        <h:outputText value="#{countryController.selected.name}" title="#{messages.ViewCountryTitle_name}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_continent}"/>
+                        <h:outputText value="#{countryController.selected.continent}" title="#{messages.ViewCountryTitle_continent}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_region}"/>
+                        <h:outputText value="#{countryController.selected.region}" title="#{messages.ViewCountryTitle_region}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_surfaceArea}"/>
+                        <h:outputText value="#{countryController.selected.surfaceArea}" title="#{messages.ViewCountryTitle_surfaceArea}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_indepYear}"/>
+                        <h:outputText value="#{countryController.selected.indepYear}" title="#{messages.ViewCountryTitle_indepYear}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_population}"/>
+                        <h:outputText value="#{countryController.selected.population}" title="#{messages.ViewCountryTitle_population}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_lifeExpectancy}"/>
+                        <h:outputText value="#{countryController.selected.lifeExpectancy}" title="#{messages.ViewCountryTitle_lifeExpectancy}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_gnp}"/>
+                        <h:outputText value="#{countryController.selected.gnp}" title="#{messages.ViewCountryTitle_gnp}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_GNPOld}"/>
+                        <h:outputText value="#{countryController.selected.GNPOld}" title="#{messages.ViewCountryTitle_GNPOld}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_localName}"/>
+                        <h:outputText value="#{countryController.selected.localName}" title="#{messages.ViewCountryTitle_localName}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_governmentForm}"/>
+                        <h:outputText value="#{countryController.selected.governmentForm}" title="#{messages.ViewCountryTitle_governmentForm}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_headOfState}"/>
+                        <h:outputText value="#{countryController.selected.headOfState}" title="#{messages.ViewCountryTitle_headOfState}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_capital}"/>
+                        <h:outputText value="#{countryController.selected.capital}" title="#{messages.ViewCountryTitle_capital}"/>
+
+                        <h:outputText value="#{messages.ViewCountryLabel_code2}"/>
+                        <h:outputText value="#{countryController.selected.code2}" title="#{messages.ViewCountryTitle_code2}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{messages.buttonKapat}" onclick="PF('CountryViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <h:outputStylesheet library="css" name="pfcrud.css" />
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        
+
+        <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+        <h:outputScript library="scripts" name="bootstrap.min.js"/>
+        <h:outputScript library="scripts" name="pfcrud.js"/>
+
+        <title>#{messages.AppName}</title>
+    </h:head>
+    <h:body id="GirisForm">
+        <p:growl id="growlGiris" life="3000"/>
+        <h:form>
+            <div class="container">
+                    <div style="position: absolute;margin: auto;height: 400px;width: 400px;left: 0;right: 0;top: 0;bottom: 0;">
+                        <h:graphicImage library="images" name="logo-400.png" style="opacity: 0.6"/>
+                    </div>
+                    <div class="panel-ortala" style="opacity: 0.9">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                <h1 class="panel-title text-center">
+                                    #{messages.AppName}
+                                </h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row text-center">
+                                    <p:inputText id="username" styleClass="giris-text"/>
+                                    <p:watermark value="Kullanıcı Adı" for="username"/>
+                                </div>
+                                <div class="row text-center">
+                                    <p:password id="password" styleClass="giris-text"/>
+                                    <p:watermark value="Parola" for="password"/>
+                                </div>
+                                <div class="row text-center">
+                                    <p:commandButton value="Giriş" styleClass="giris-button btn btn-success"/>
+                                </div>
+                            </div>
+                            <div class="panel-footer text-center">
+                                #{messages.altBaslik}
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>

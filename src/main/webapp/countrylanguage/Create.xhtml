@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CountrylanguageCreateDlg" widgetVar="CountrylanguageCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{messages.CreateCountrylanguageTitle}" closeOnEscape="true">
+
+            <h:form id="CountrylanguageCreateForm">
+
+                <h:panelGroup id="display" rendered="#{countrylanguageController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{messages.CreateCountrylanguageLabel_countrylanguagePK_language}" for="countrylanguagePK_language" />
+                        <p:inputText id="countrylanguagePK_language" value="#{countrylanguageController.selected.countrylanguagePK.language}" title="#{messages.CreateCountrylanguageTitle_countrylanguagePK_language}" required="true" requiredMessage="#{messages.CreateCountrylanguageRequiredMessage_countrylanguagePK_language}" size="30" maxlength="30"/>
+
+                        <p:outputLabel value="#{messages.CreateCountrylanguageLabel_isOfficial}" for="isOfficial" />
+                        <p:inputText id="isOfficial" value="#{countrylanguageController.selected.isOfficial}" title="#{messages.CreateCountrylanguageTitle_isOfficial}" required="true" requiredMessage="#{messages.CreateCountrylanguageRequiredMessage_isOfficial}" size="2" maxlength="2"/>
+
+                        <p:outputLabel value="#{messages.CreateCountrylanguageLabel_percentage}" for="percentage" />
+                        <p:inputText id="percentage" value="#{countrylanguageController.selected.percentage}" title="#{messages.CreateCountrylanguageTitle_percentage}" required="true" requiredMessage="#{messages.CreateCountrylanguageRequiredMessage_percentage}"/>
+
+                        <p:outputLabel value="#{messages.CreateCountrylanguageLabel_country}" for="country" />
+                        <p:selectOneMenu id="country" value="#{countrylanguageController.selected.country}" required="true" requiredMessage="#{messages.CreateCountrylanguageRequiredMessage_country}" converter="countryConverter">
+                            <f:selectItem itemLabel="#{messages.SelectOneMessage}"/>
+                            <f:selectItems value="#{countryController.items}"
+                                           var="countryItem"
+                                           itemValue="#{countryItem}"
+                                           itemLabel="#{countryItem.name.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{countrylanguageController.saveNew}" value="#{messages.buttonKaydet}" update="display,:CountrylanguageListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CountrylanguageCreateDialog'));">
+                        <p:confirm header="#{messages.ConfirmationHeader}" message="#{messages.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{messages.buttonIptal}" onclick="PF('CountrylanguageCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

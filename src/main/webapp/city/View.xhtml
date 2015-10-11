@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CityViewDlg" widgetVar="CityViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{messages.ViewCityTitle}" closeOnEscape="true">
+
+            <h:form id="CityViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{cityController.selected != null}">
+
+                        <h:outputText value="#{messages.ViewCityLabel_id}"/>
+                        <h:outputText value="#{cityController.selected.id}" title="#{messages.ViewCityTitle_id}"/>
+
+                        <h:outputText value="#{messages.ViewCityLabel_name}"/>
+                        <h:outputText value="#{cityController.selected.name}" title="#{messages.ViewCityTitle_name}"/>
+
+                        <h:outputText value="#{messages.ViewCityLabel_district}"/>
+                        <h:outputText value="#{cityController.selected.district}" title="#{messages.ViewCityTitle_district}"/>
+
+                        <h:outputText value="#{messages.ViewCityLabel_population}"/>
+                        <h:outputText value="#{cityController.selected.population}" title="#{messages.ViewCityTitle_population}"/>
+
+                        <h:outputText value="#{messages.ViewCityLabel_countryCode}"/>
+                        <h:outputText value="#{cityController.selected.countryCode.name}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{messages.buttonKapat}" onclick="PF('CityViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

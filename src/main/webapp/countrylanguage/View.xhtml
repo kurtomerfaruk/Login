@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CountrylanguageViewDlg" widgetVar="CountrylanguageViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{messages.ViewCountrylanguageTitle}" closeOnEscape="true">
+
+            <h:form id="CountrylanguageViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{countrylanguageController.selected != null}">
+
+                        <h:outputText value="#{messages.ViewCountrylanguageLabel_countrylanguagePK_language}"/>
+                        <h:outputText value="#{countrylanguageController.selected.countrylanguagePK.language}" title="#{messages.ViewCountrylanguageTitle_countrylanguagePK_language}"/>
+
+                        <h:outputText value="#{messages.ViewCountrylanguageLabel_isOfficial}"/>
+                        <h:outputText value="#{countrylanguageController.selected.isOfficial}" title="#{messages.ViewCountrylanguageTitle_isOfficial}"/>
+
+                        <h:outputText value="#{messages.ViewCountrylanguageLabel_percentage}"/>
+                        <h:outputText value="#{countrylanguageController.selected.percentage}" title="#{messages.ViewCountrylanguageTitle_percentage}"/>
+
+                        <h:outputText value="#{messages.ViewCountrylanguageLabel_country}"/>
+                        <h:outputText value="#{countrylanguageController.selected.country.name}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{messages.buttonKapat}" onclick="PF('CountrylanguageViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

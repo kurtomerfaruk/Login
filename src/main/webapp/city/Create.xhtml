@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CityCreateDlg" widgetVar="CityCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{messages.CreateCityTitle}" closeOnEscape="true">
+
+            <h:form id="CityCreateForm">
+
+                <h:panelGroup id="display" rendered="#{cityController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{messages.CreateCityLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{cityController.selected.name}" title="#{messages.CreateCityTitle_name}" required="true" requiredMessage="#{messages.CreateCityRequiredMessage_name}" size="35" maxlength="35"/>
+
+                        <p:outputLabel value="#{messages.CreateCityLabel_district}" for="district" />
+                        <p:inputText id="district" value="#{cityController.selected.district}" title="#{messages.CreateCityTitle_district}" required="true" requiredMessage="#{messages.CreateCityRequiredMessage_district}" size="20" maxlength="20"/>
+
+                        <p:outputLabel value="#{messages.CreateCityLabel_population}" for="population" />
+                        <p:inputText id="population" value="#{cityController.selected.population}" title="#{messages.CreateCityTitle_population}" required="true" requiredMessage="#{messages.CreateCityRequiredMessage_population}"/>
+
+                        <p:outputLabel value="#{messages.CreateCityLabel_countryCode}" for="countryCode" />
+                        <p:selectOneMenu id="countryCode" value="#{cityController.selected.countryCode}" required="true" requiredMessage="#{messages.CreateCityRequiredMessage_countryCode}" converter="countryConverter">
+                            <f:selectItem itemLabel="#{messages.SelectOneMessage}"/>
+                            <f:selectItems value="#{countryController.items}"
+                                           var="countryCodeItem"
+                                           itemValue="#{countryCodeItem}"
+                                           itemLabel="#{countryCodeItem.name.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cityController.saveNew}" value="#{messages.buttonKaydet}" update="display,:CityListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CityCreateDialog'));">
+                        <p:confirm header="#{messages.ConfirmationHeader}" message="#{messages.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{messages.buttonIptal}" onclick="PF('CityCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

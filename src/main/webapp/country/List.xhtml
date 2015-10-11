@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="CountryListForm">
+
+        <p:panel header="#{messages.ListCountryTitle}">
+            <p:contextMenu id="CountryDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{messages.Create}" onclick="document.getElementById('CountryListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{messages.View}" onclick="document.getElementById('CountryListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{messages.Edit}" onclick="document.getElementById('CountryListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{messages.Delete}" onclick="document.getElementById('CountryListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{messages.CountryMenuItem_countrylanguageList}" icon="ui-icon-search"  action="#{countryController.navigateCountrylanguageList}" disabled="#{empty countryController.selected.countrylanguageList}" ajax="false"/>  
+                <p:menuitem value="#{messages.CountryMenuItem_cityList}" icon="ui-icon-search"  action="#{countryController.navigateCityList}" disabled="#{empty countryController.selected.cityList}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{countryController.items}"
+                         var="item"
+                         rowKey="#{item.code}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{countryController.selected}">
+
+                <p:ajax event="rowSelect"   update=":CountryListForm:createButton :CountryListForm:viewButton :CountryListForm:editButton :CountryListForm:deleteButton :CountryListForm:CountryDataTableContextMenu" listener="#{countryController.resetParents}"/>
+                <p:ajax event="rowUnselect" update=":CountryListForm:createButton :CountryListForm:viewButton :CountryListForm:editButton :CountryListForm:deleteButton :CountryListForm:CountryDataTableContextMenu" listener="#{countryController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('CountryListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.code}" filterBy="#{item.code}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountryTitle_code}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.code}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.name}" filterBy="#{item.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountryTitle_name}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.name}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.continent}" filterBy="#{item.continent}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountryTitle_continent}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.continent}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.region}" filterBy="#{item.region}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountryTitle_region}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.region}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.surfaceArea}" filterBy="#{item.surfaceArea}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountryTitle_surfaceArea}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.surfaceArea}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.indepYear}" filterBy="#{item.indepYear}">
+                    <f:facet name="header">
+                        <h:outputText value="#{messages.ListCountryTitle_indepYear}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.indepYear}"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.population}" filterBy="#{item.population}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{messages.ListCountryTitle_population}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.population}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.lifeExpectancy}" filterBy="#{item.lifeExpectancy}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{messages.ListCountryTitle_lifeExpectancy}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.lifeExpectancy}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.gnp}" filterBy="#{item.gnp}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{messages.ListCountryTitle_gnp}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.gnp}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.GNPOld}" filterBy="#{item.GNPOld}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{messages.ListCountryTitle_GNPOld}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.GNPOld}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.localName}" filterBy="#{item.localName}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{messages.ListCountryTitle_localName}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.localName}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.governmentForm}" filterBy="#{item.governmentForm}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{messages.ListCountryTitle_governmentForm}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.governmentForm}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.headOfState}" filterBy="#{item.headOfState}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{messages.ListCountryTitle_headOfState}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.headOfState}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.capital}" filterBy="#{item.capital}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{messages.ListCountryTitle_capital}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.capital}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.code2}" filterBy="#{item.code2}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{messages.ListCountryTitle_code2}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.code2}"/>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{messages.Create}" actionListener="#{countryController.prepareCreate}" update=":CountryCreateForm" oncomplete="PF('CountryCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{messages.View}" update=":CountryViewForm" oncomplete="PF('CountryViewDialog').show()" disabled="#{empty countryController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{messages.Edit}" update=":CountryEditForm" oncomplete="PF('CountryEditDialog').show()" disabled="#{empty countryController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{messages.Delete}" actionListener="#{countryController.delete}" update=":growl,datalist" disabled="#{empty countryController.selected}">
+                <p:confirm header="#{messages.ConfirmationHeader}" message="#{messages.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="CountrylanguageEditDlg" widgetVar="CountrylanguageEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{messages.EditCountrylanguageTitle}" closeOnEscape="true">
+
+            <h:form id="CountrylanguageEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{countrylanguageController.selected != null}">
+
+
+                        <h:outputLabel value="#{messages.EditCountrylanguageLabel_countrylanguagePK_language}" for="countrylanguagePK_language" />
+                        <h:outputText id="countrylanguagePK_language" value="#{countrylanguageController.selected.countrylanguagePK.language}" />
+
+                        <p:outputLabel value="#{messages.EditCountrylanguageLabel_isOfficial}" for="isOfficial" />
+                        <p:inputText id="isOfficial" value="#{countrylanguageController.selected.isOfficial}" title="#{messages.EditCountrylanguageTitle_isOfficial}" required="true" requiredMessage="#{messages.EditCountrylanguageRequiredMessage_isOfficial}" size="2" maxlength="2"/>
+
+                        <p:outputLabel value="#{messages.EditCountrylanguageLabel_percentage}" for="percentage" />
+                        <p:inputText id="percentage" value="#{countrylanguageController.selected.percentage}" title="#{messages.EditCountrylanguageTitle_percentage}" required="true" requiredMessage="#{messages.EditCountrylanguageRequiredMessage_percentage}"/>
+
+
+                        <h:outputLabel value="#{messages.EditCountrylanguageLabel_country}" for="country" />
+                        <h:outputText id="country" value="#{countrylanguageController.selected.country}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{countrylanguageController.save}" value="#{messages.buttonKaydet}" update="display,:CountrylanguageListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CountrylanguageEditDialog'));">
+                        <p:confirm header="#{messages.ConfirmationHeader}" message="#{messages.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{messages.buttonIptal}" onclick="PF('CountrylanguageEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="CountryEditDlg" widgetVar="CountryEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{messages.EditCountryTitle}" closeOnEscape="true">
+
+            <h:form id="CountryEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{countryController.selected != null}">
+
+
+                        <h:outputLabel value="#{messages.EditCountryLabel_code}" for="code" />
+                        <h:outputText id="code" value="#{countryController.selected.code}" />
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{countryController.selected.name}" title="#{messages.EditCountryTitle_name}" required="true" requiredMessage="#{messages.EditCountryRequiredMessage_name}" size="52" maxlength="52"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_continent}" for="continent" />
+                        <p:inputText id="continent" value="#{countryController.selected.continent}" title="#{messages.EditCountryTitle_continent}" required="true" requiredMessage="#{messages.EditCountryRequiredMessage_continent}" size="13" maxlength="13"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_region}" for="region" />
+                        <p:inputText id="region" value="#{countryController.selected.region}" title="#{messages.EditCountryTitle_region}" required="true" requiredMessage="#{messages.EditCountryRequiredMessage_region}" size="26" maxlength="26"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_surfaceArea}" for="surfaceArea" />
+                        <p:inputText id="surfaceArea" value="#{countryController.selected.surfaceArea}" title="#{messages.EditCountryTitle_surfaceArea}" required="true" requiredMessage="#{messages.EditCountryRequiredMessage_surfaceArea}"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_indepYear}" for="indepYear" />
+                        <p:inputText id="indepYear" value="#{countryController.selected.indepYear}" title="#{messages.EditCountryTitle_indepYear}"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_population}" for="population" />
+                        <p:inputText id="population" value="#{countryController.selected.population}" title="#{messages.EditCountryTitle_population}" required="true" requiredMessage="#{messages.EditCountryRequiredMessage_population}"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_lifeExpectancy}" for="lifeExpectancy" />
+                        <p:inputText id="lifeExpectancy" value="#{countryController.selected.lifeExpectancy}" title="#{messages.EditCountryTitle_lifeExpectancy}"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_gnp}" for="gnp" />
+                        <p:inputText id="gnp" value="#{countryController.selected.gnp}" title="#{messages.EditCountryTitle_gnp}"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_GNPOld}" for="GNPOld" />
+                        <p:inputText id="GNPOld" value="#{countryController.selected.GNPOld}" title="#{messages.EditCountryTitle_GNPOld}"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_localName}" for="localName" />
+                        <p:inputText id="localName" value="#{countryController.selected.localName}" title="#{messages.EditCountryTitle_localName}" required="true" requiredMessage="#{messages.EditCountryRequiredMessage_localName}" size="45" maxlength="45"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_governmentForm}" for="governmentForm" />
+                        <p:inputText id="governmentForm" value="#{countryController.selected.governmentForm}" title="#{messages.EditCountryTitle_governmentForm}" required="true" requiredMessage="#{messages.EditCountryRequiredMessage_governmentForm}" size="45" maxlength="45"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_headOfState}" for="headOfState" />
+                        <p:inputText id="headOfState" value="#{countryController.selected.headOfState}" title="#{messages.EditCountryTitle_headOfState}" size="60" maxlength="60"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_capital}" for="capital" />
+                        <p:inputText id="capital" value="#{countryController.selected.capital}" title="#{messages.EditCountryTitle_capital}"/>
+
+                        <p:outputLabel value="#{messages.EditCountryLabel_code2}" for="code2" />
+                        <p:inputText id="code2" value="#{countryController.selected.code2}" title="#{messages.EditCountryTitle_code2}" required="true" requiredMessage="#{messages.EditCountryRequiredMessage_code2}" size="2" maxlength="2"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{countryController.save}" value="#{messages.buttonKaydet}" update="display,:CountryListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CountryEditDialog'));">
+                        <p:confirm header="#{messages.ConfirmationHeader}" message="#{messages.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{messages.buttonIptal}" onclick="PF('CountryEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
